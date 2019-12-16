@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login or Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div id="registration">
+        <h1>Registration</h1>
+        <form action="/users/register" method="POST">
+            {% csrf_token %}
+            Name:<br><input type="text" name ="first_name" class="input_box" placeholder="first name">
+            <input type="text" name ="last_name" class="input_box" placeholder="last name">
+            birthday:<br><input type="date" name ="birthday" class="input_box"><br>
+            email:<br><input type="email" name ="email" class="input_box" placeholder="email"><br>
+            password:<br><input type="password" name ="password" class="input_box" placeholder="password"><br>
+            confirm password:<br><input type="password" name ="confirm_password" class="input_box" placeholder="confirm password"><br>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    <div id="login">
+        <h1>Login</h1>
+        <form action="/users/login" method="POST">
+            {% csrf_token %}
+            email:<br><input type="email" name="email" class="input_box"><br>
+            password:<br><input type="password" name="password" class="input_box"><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
