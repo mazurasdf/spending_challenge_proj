@@ -45,7 +45,7 @@ def login(request):
 
 def success_page(request):
     if 'user_id' in request.session:
-        return render(request, 'success.html')
+        return redirect('/app')
     else:
         messages.error(request, 'Please enter login credentials')
         return redirect('/')
