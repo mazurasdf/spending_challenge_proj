@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3 class="top">Welcome, {{request.session.user_name}}</h3>
+    <h3 class="top logout"><a href="">Log Out</a></h3>
+<table class= "info_table" cellspacing="0">
+    <thead>
+        <th><h2>Info About me</h2></th>
+        <th class="tablehead"><h2>Actions</h2></th>
+        
+    </thead>
+    <tbody>
+        <tr>
+            <td class="secondcolumn"><a href="">My challenges</a></td>
+            <td class="secondcolumn"><a href="">Add a challenge</a></td>
+            
+        </tr>
+        <tr >
+            <td class="secondcolumn"><a href="">My Purchases</a></td>
+            <td class="secondcolumn"><a href="">Add a purchase</a></td>
+            
+        </tr>
+    </tbody>
+</table>
+  
+
+</body>
+
+
+<style>
+    *{
+        vertical-align: top;
+    }
+    .top{
+        display: inline-block;
+
+    }
+    .logout{
+        margin-left:900px;
+        display: inline-block;
+    }
+    body{
+        background-color: aqua
+    }
+    .tablehead{
+        padding-left:  20px;
+    }
+    .info_table{
+        color: blue;
+        margin:0 auto;
+    }
+    .secondcolumn{
+        padding:  20px;
+    }
+    table {
+        border-collapse: collapse;
+        
+    }
+    th, td{
+        border: 2px solid black;
+    }
+    
+</style>
+
+</html>

@@ -28,9 +28,10 @@ def register_user(request):
     messages.info(request, 'Account created successfully')
     return redirect('/')
 
+
 def login(request):
     try:
-        user = User.objects.get(email = request.POST['email'])
+        user = User.objects.get(email=request.POST['email'])
     except:
         messages.error(request, 'Invalid email or password')
         return redirect('/')
@@ -43,12 +44,14 @@ def login(request):
         messages.error(request, 'Invalid email or password')
         return redirect('/')
 
+
 def success_page(request):
     if 'user_id' in request.session:
         return redirect('/app')
     else:
         messages.error(request, 'Please enter login credentials')
         return redirect('/')
+
 
 def logout(request):
     del request.session['user_id']
