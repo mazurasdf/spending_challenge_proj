@@ -7,18 +7,27 @@ def index(request):
     return redirect(f'/app/users/{request.session["user_id"]}')
 
 def user_page(request, user_id):
-    return render(request, 'user_page.html')
+    return render(request, 'userprofile.html')
 
 def add_purchase_page(request, user_id):
     this_user = User.objects.get(id=request.session['user_id'])
     context = {
-        'user_purchases': Purchase.objects.filter(user = this_user)
+        'user_purchases': Purchase.objects.filter(user = this_user),
+        'categories': Category.objects.all()
     }
     return render(request, 'create_purchase.html', context)
 
 def create_purchase(request, user_id):
+    fixedcategory=request.POST['category']
+    tempdict={
+            "category": request.POST['category']
+        }
+    if request.POST['category']=='newcategory':
+        fixedcategory=request.POST['newcategory']
+        tempdict['category']=request.POST['newcategory']
+
     errors = Purchase.objects.basic_validator(request.POST)
-    errors.update(Category.objects.basic_validator(request.POST))
+    errors.update(Category.objects.basic_validator(tempdict))
     if errors:
         for key, value in errors.items():
             messages.error(request, value)
@@ -27,6 +36,15 @@ def create_purchase(request, user_id):
     Purchase.objects.create(item_name=request.POST['item'],
                             location=request.POST['location'],
                             amount=float(request.POST['amount']),
-                            category=Category.objects.get(name=request.POST['category']),
+                            category=Category.objects.get(name=fixedcategory),
                             user=User.objects.get(id=request.session['user_id']))
-    return redirect(f'/app/users/{request.session["user_id"]}/purchases/new')
+    return redirect(f'/app/users/{request.session["user_id"]}/purchases')
+
+
+def user_purchases(request, user_id):
+    this_user= User.objects.get(id=request.session['user_id'])
+    context ={
+        
+        "user_purchases": Purchase.objects.filter(user=this_user)
+    }
+    return render(request, 'user_purchases.html', context)

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+   
 </head>
+
 <body>
     <h2 class="Header">Add a purchase</h2>
 
@@ -17,39 +20,59 @@
     </ul>
     {% endif %}
 
-    <form class="add_item_form" action ="/app/users/{{request.session.user_id}}/purchases/create", method='POST'>
+    <form class="add_item_form" action="/app/users/{{request.session.user_id}}/purchases/create" , method='POST'>
         {% csrf_token %}
         <p>Item: <input type="text" name="item"></p>
-        <p>Category: <select name="category">     
-            <option value="food">Food</option>
-            <option value="drinks">Drinks</option>
-            <option value="outings">Outings</option>
-            </select> 
+        <p>Category: <select id="selectcategory" name="category"></p>
+        <option value="newcategory">Click to add new category</option>
+        {%for category in categories%}
+        <option value="{{category.name}}">{{category.name}}</option>
+        {%endfor%}
+        </select>
+        <br><p id="addnewcategory">Add New Category: <input type="text"  name="newcategory"></p>
         <p>Amount: <input type="text" name="amount"></p>
         <p>Location: <input type="text" name="location"></p>
-        
-        <input id= "addpurchase" type="submit" value="Add Purchase">
+
+        <input id="addpurchase" type="submit" value="Add Purchase">
     </form>
 
 </body>
 
 <style>
-    .Header{
-        margin-left:650px;
+    .Header {
+        margin-left: 650px;
         text-decoration: underline;
     }
-    .add_item_form{
+
+    .add_item_form {
         margin-left: 650px;
         font-size: 24px;
     }
-    #addpurchase{
+
+    #addpurchase {
         font-size: 100%;
         color: blue;
-       
-    }
-    input{
-        font-size: 18px;
+
     }
 
+    input {
+        font-size: 18px;
+    }
 </style>
+
+<script>
+        var activity = document.getElementById("selectcategory");
+        var inputbox = document.getElementById("addnewcategory");
+        activity.addEventListener("change", function () {
+            if (activity.value == "newcategory") {
+                inputbox.style.display = "block";
+            }
+            else {
+                inputbox.style.display = "none";
+            }
+
+        });
+
+    </script>
+
 </html>
