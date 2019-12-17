@@ -26,6 +26,12 @@ class Category_Manager(models.Manager):
             Category.objects.create(name=post_data['category'])
         return errors
 
+class Challenge_Manager(models.Manager):
+    def basic_validator(self, post_data):
+        errors = {}
+
+        return errors
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -50,3 +56,4 @@ class Challenge(models.Model):
     categories = models.ManyToManyField(Category, related_name='challenges')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = Challenge_Manager()
