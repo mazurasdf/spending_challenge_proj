@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2 class="Header">Add a purchase</h2>
+    <form class="add_item_form" action ="/addpurchase", method='POST'>
+        <p>Item: <input type="text" name=""></p>
+        <p>Category: <select name="category">     
+            <option value="food">Food</option>
+            <option value="drinks">Drinks</option>
+            <option value="outings">Outings</option>
+            </select> 
+        <p>Amount: <input type="text" name=""></p>
+        
+        <input id= "addpurchase" type="submit" value="Add Purchase">pyt
+
+
+    </form>
+</body>
+
+<style>
+    .Header{
+        margin-left:650px;
+        text-decoration: underline;
+    }
+    .add_item_form{
+        margin-left: 650px;
+        font-size: 24px;
+    }
+    #addpurchase{
+        font-size: 100%;
+        color: blue;
+       
+    }
+    input{
+        font-size: 18px;
+    }
+
+</style>
+</html>
