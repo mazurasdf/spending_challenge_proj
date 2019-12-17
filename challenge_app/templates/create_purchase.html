@@ -8,19 +8,29 @@
 </head>
 <body>
     <h2 class="Header">Add a purchase</h2>
-    <form class="add_item_form" action ="/addpurchase", method='POST'>
-        <p>Item: <input type="text" name=""></p>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form class="add_item_form" action ="/app/users/{{request.session.user_id}}/purchases/create", method='POST'>
+        {% csrf_token %}
+        <p>Item: <input type="text" name="item"></p>
         <p>Category: <select name="category">     
             <option value="food">Food</option>
             <option value="drinks">Drinks</option>
             <option value="outings">Outings</option>
             </select> 
-        <p>Amount: <input type="text" name=""></p>
+        <p>Amount: <input type="text" name="amount"></p>
+        <p>Location: <input type="text" name="location"></p>
         
-        <input id= "addpurchase" type="submit" value="Add Purchase">pyt
-
-
+        <input id= "addpurchase" type="submit" value="Add Purchase">
     </form>
+
 </body>
 
 <style>
