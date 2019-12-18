@@ -13,6 +13,11 @@
     <p>Challenge Name: {{challenge_to_show.name}}</p>
     <p>Your maximum spending amount: {{challenge_to_show.dollar_max}} </p>
     <p>Your maximum number of transactions: {{challenge_to_show.purchase_max}}</p>
+    <p>Categories:
+        {% for category in challenge_to_show.categories.all %}
+            {{category.name}} 
+        {% endfor %}
+    </p>
 
     <div class="user1">
         <p>Name: {{user.first_name}} {{user.last_name}}</p>
