@@ -20,38 +20,27 @@
         {{category.name}}
         {% endfor %}
     </p>
-    {% for user in challenge_to_show.users.all %}
-    <div class="user1">
-        <p>Name: {{user.first_name}} {{user.last_name}}</p>
-       
-        <table>
-            <thead>
-                <th>Purchase</th>
-                <th class="amount">Amount</th>
-            </thead>
-            <tbody>
-                {% for purchase in user.purchases.all %}
-                <tr>
-                    <td>{{purchase.item_name}}</td>
-                    <td>{{purchase.amount}}</td>
-                </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
-    </div>
-    <p id="total">Total Spending:</p>
+    {% for this_user in user_list %}
+        <div class="user_box">
+            <p>Name: {{this_user.user.first_name}} {{this_user.user.last_name}}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for purchase in this_user.purchases %}
+                        <tr>
+                            <td>{{purchase.item_name}}</td>
+                            <td>{{purchase.amount}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% endfor %}
-
-    <!-- <div class="user2">
-        <p>Name:{{added_user.first_name}} {{added_user.last_name}}</p>
-        <table>
-            <thead>
-                <th>Purchase</th>
-                <th class="amount">Amount</th>
-            </thead>
-        </table>
-    </div> -->
     <form action="/app/users/add_challenger_to_challenge/{{challenge_to_show.id}}", method='POST'>
         {% csrf_token %}
         <p>Invite A Challenger: Add Email Address of user in database:<input type="email" name="emailinvite"></p>
@@ -74,7 +63,6 @@
         margin-right: 60px;
 
     }
-
     .user2 {
         display: inline-block;
         border: 3px solid red;
