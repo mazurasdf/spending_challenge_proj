@@ -74,15 +74,26 @@ def create_challenge(request, user_id):
 
 def show_challenge(request, user_id, challenge_id):
     this_challenge = Challenge.objects.get(id=challenge_id)
-    context = {
-        "challenge_to_show": this_challenge,
-        "user": User.objects.get(id=request.session['user_id']),
+    context ={
+        "challenge_to_show":Challenge.objects.get(id=challenge_id),
+        "user":User.objects.get(id=request.session['user_id']),
+        # "added_user": User.objects.get(email=request.POST['emailinvite'])
         "user_purchases": Purchase.objects.filter(category__in=this_challenge.categories.all(),
                                                   user=User.objects.get(id=request.session['user_id']))
     }
     return render(request, 'challengepage.html', context)
 
 
+def add_challenger(request, challenge_id):
+    # challenger_to_add: 
+    challenge_to_add_to= Challenge.objects.get(id=challenge_id)
+    user_to_add= User.objects.get(email=request.POST['emailinvite'])
     
 
+    challenge_to_add_to.users.add(user_to_add)
+    # context={
+    #     "added_user": User.objects.get(email=request.POST['emailinvite'])
+       
+    # }
+    return redirect(f"/app/users/{request.session['user_id']}/challenges/{challenge_to_add_to.id}")
 

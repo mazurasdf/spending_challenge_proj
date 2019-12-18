@@ -32,7 +32,7 @@
     </div>
 
     <div class="user2">
-        <p>Name:</p>
+        <p>Name:{{added_user.first_name}} {{added_user.last_name}}</p>
         <table>
             <thead>
                 <th>Purchase</th>
@@ -40,10 +40,15 @@
             </thead>
         </table>
     </div>
-    <form action="/add_challenger", method='POST'>
-        <p>Invite A Challenger:<input type="email" name="emailinvite"></p>
+    <form action="/app/users/add_challenger_to_challenge/{{challenge_to_show.id}}", method='POST'>
+        {% csrf_token %}
+        <p>Invite A Challenger: Add Email Address of user in database:<input type="email" name="emailinvite"></p>
     <input type="submit" value="Add Challenger">
     </form>
+    
+{%for user in challenge_to_show.users.all%}
+<p>{{user.first_name}}</p>
+{%endfor%}
     
 </body>
 
