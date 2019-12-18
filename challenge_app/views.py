@@ -7,6 +7,9 @@ def index(request):
     return redirect(f'/app/users/{request.session["user_id"]}')
 
 def user_page(request, user_id):
+    if not "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect('/')
     return render(request, 'userprofile.html')
 
 def add_purchase_page(request, user_id):
