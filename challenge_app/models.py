@@ -29,7 +29,16 @@ class Category_Manager(models.Manager):
 class Challenge_Manager(models.Manager):
     def basic_validator(self, post_data):
         errors = {}
-
+        if len(post_data[name]) < 1:
+            errors['name'] = 'Must incude a name'
+        try:
+            int(purchase_max)
+        except:
+            errors['purchase_max'] = 'Must include valid int for purchase max'
+        try:
+            float(dollar_max)
+        except:
+            errors['dollar_max'] = 'Must include valid dollar amount for dollar max'
         return errors
 
 class Category(models.Model):
