@@ -19,49 +19,41 @@
         {% endfor %}
     </p>
 
-    <div class="user1">
-        <p>Name: {{user.first_name}} {{user.last_name}}</p>
-        <table>
+
+    {% for this_user in user_list %}
+        <div class="user_box">
+            <p>Name: {{this_user.user.first_name}} {{this_user.user.last_name}}</p>
+            <table>
                 <thead>
-                    <th>Purchase</th>
-                    <th class="amount">Amount</th>
+                    <tr>
+                        <th>Item</th>
+                        <th>Amount</th>
+                    </tr>
                 </thead>
+                <tbody>
+                    {% for purchase in this_user.purchases %}
+                        <tr>
+                            <td>{{purchase.item_name}}</td>
+                            <td>{{purchase.amount}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
-
-    </div>
-
-    <div class="user2">
-        <p>Name:{{added_user.first_name}} {{added_user.last_name}}</p>
-        <table>
-            <thead>
-                <th>Purchase</th>
-                <th class="amount">Amount</th>
-            </thead>
-        </table>
-    </div>
+    {% endfor %}
     <form action="/app/users/add_challenger_to_challenge/{{challenge_to_show.id}}", method='POST'>
         {% csrf_token %}
         <p>Invite A Challenger: Add Email Address of user in database:<input type="email" name="emailinvite"></p>
     <input type="submit" value="Add Challenger">
     </form>
     
-{%for user in challenge_to_show.users.all%}
-<p>{{user.first_name}}</p>
-{%endfor%}
-    
 </body>
 
 <style>
-    .user1{
+    .user_box{
         display: inline-block;
         border: 1px solid black;
         
-    }
-    .user2{
-        display: inline-block;
-        border: 1px solid black;
-        margin-left: 80px;
     }
  
 </style>
