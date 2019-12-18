@@ -27,7 +27,7 @@
     <p>Categories</p>
 
     {%for category in categories%}
-    <p><input type="checkbox" value="{{category.name}}">{{category.name}}</p>
+    <p><input type="checkbox" value="{{category.name}}" name="{{category.name}}">{{category.name}}</p>
     {%endfor%}
 
     <input type="submit" value="Add Challenge and take me to challenge page">
