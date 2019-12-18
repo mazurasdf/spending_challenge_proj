@@ -55,4 +55,12 @@ def add_challenge(request, user_id):
     }
     return render(request, 'add_challenge.html', context)
 
+def create_challenge(request, user_id):
+    errors = Challenge.objects.basic_validator(request.POST)
+    if errors:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f'/app/users/{request.session["user_id"]}/add_challenge')
+    return HttpResponse('creating a challenge')
+
 

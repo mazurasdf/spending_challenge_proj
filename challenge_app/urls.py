@@ -7,5 +7,6 @@ urlpatterns = [
     path('users/<int:user_id>/purchases/new', views.add_purchase_page),
     path('users/<int:user_id>/purchases/create', views.create_purchase),
     path('users/<int:user_id>/purchases', views.user_purchases),
-    path('users/<int:user_id>/add_challenge', views.add_challenge)
+    path('users/<int:user_id>/add_challenge', views.add_challenge),
+    path('users/<int:user_id>/challenges/create', views.create_challenge)
 ]
