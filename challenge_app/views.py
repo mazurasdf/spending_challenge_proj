@@ -77,10 +77,17 @@ def show_challenge(request, user_id, challenge_id):
     context ={
         "challenge_to_show":Challenge.objects.get(id=challenge_id),
         "user":User.objects.get(id=request.session['user_id']),
-        # "added_user": User.objects.get(email=request.POST['emailinvite'])
-        "user_purchases": Purchase.objects.filter(category__in=this_challenge.categories.all(),
-                                                  user=User.objects.get(id=request.session['user_id']))
+        # "user_purchases": Purchase.objects.filter(category__in=this_challenge.categories.all(),
+        #                                           user=User.objects.get(id=request.session['user_id']))
+        'user_list': []
     }
+
+    for user in this_challenge.users.all():
+        context['user_list'].append({
+            'user': user,
+            'purchases': Purchase.objects.filter(category__in=this_challenge.categories.all(),
+                                                 user=User.objects.get(id=user.id))
+        })
     return render(request, 'challengepage.html', context)
 
 
