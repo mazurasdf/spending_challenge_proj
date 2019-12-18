@@ -65,18 +65,22 @@ def create_challenge(request, user_id):
 
     challenge_created=Challenge.objects.create(name=request.POST['name'], purchase_max=request.POST['purchase_max'], dollar_max=request.POST['dollar_max'])
     challenge_created.users.add(this_user)
+
+    for category in Category.objects.all():
+        if category.name in request.POST:
+            challenge_created.categories.add(category)
  
-    
     return redirect(f"/app/users/{request.session['user_id']}/challenges/{challenge_created.id}")
 
 def show_challenge(request, user_id, challenge_id):
+    this_challenge = Challenge.objects.get(id=challenge_id)
     context ={
         "challenge_to_show":Challenge.objects.get(id=challenge_id),
         "user":User.objects.get(id=request.session['user_id']),
         # "added_user": User.objects.get(email=request.POST['emailinvite'])
-       
+        "user_purchases": Purchase.objects.filter(category__in=this_challenge.categories.all(),
+                                                  user=User.objects.get(id=request.session['user_id']))
     }
-
     return render(request, 'challengepage.html', context)
 
 
