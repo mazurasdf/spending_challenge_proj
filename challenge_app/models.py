@@ -26,6 +26,21 @@ class Category_Manager(models.Manager):
             Category.objects.create(name=post_data['category'])
         return errors
 
+class Challenge_Manager(models.Manager):
+    def basic_validator(self, post_data):
+        errors = {}
+        if len(post_data[name]) < 1:
+            errors['name'] = 'Must incude a name'
+        try:
+            int(purchase_max)
+        except:
+            errors['purchase_max'] = 'Must include valid int for purchase max'
+        try:
+            float(dollar_max)
+        except:
+            errors['dollar_max'] = 'Must include valid dollar amount for dollar max'
+        return errors
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -50,3 +65,4 @@ class Challenge(models.Model):
     categories = models.ManyToManyField(Category, related_name='challenges')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = Challenge_Manager()
