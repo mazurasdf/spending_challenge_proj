@@ -48,3 +48,11 @@ def user_purchases(request, user_id):
         "user_purchases": Purchase.objects.filter(user=this_user)
     }
     return render(request, 'user_purchases.html', context)
+
+def add_challenge(request, user_id):
+    context={
+        "categories": Category.objects.all()
+    }
+    return render(request, 'add_challenge.html', context)
+
+
