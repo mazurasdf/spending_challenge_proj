@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <h1>Challenge Comparison Page</h1>
     </p>
@@ -15,11 +17,9 @@
     <p>Your maximum number of transactions: {{challenge_to_show.purchase_max}}</p>
     <p>Categories:
         {% for category in challenge_to_show.categories.all %}
-            {{category.name}} 
+        {{category.name}}
         {% endfor %}
     </p>
-
-
     {% for this_user in user_list %}
         <div class="user_box">
             <p>Name: {{this_user.user.first_name}} {{this_user.user.last_name}}</p>
@@ -45,17 +45,32 @@
         {% csrf_token %}
         <p>Invite A Challenger: Add Email Address of user in database:<input type="email" name="emailinvite"></p>
     <input type="submit" value="Add Challenger">
-    </form>
-    
+    </form> 
+<h5>Users's currently in this challenge:</h5>
+{%for user in challenge_to_show.users.all%}
+<ul>
+    <li>{{user.first_name}}</li>
+
+</ul>
+{%endfor%}
+
 </body>
 
 <style>
-    .user_box{
+    .user1 {
         display: inline-block;
-        border: 1px solid black;
+        border: 3px solid red;
+        margin-right: 60px;
+
+    }
+    .user2 {
+        display: inline-block;
+        border: 3px solid red;
+        margin-left: 80px;
+    }
+    #total {
         
     }
- 
 </style>
 
 </html>
