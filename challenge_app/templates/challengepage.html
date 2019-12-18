@@ -10,16 +10,16 @@
     <h1>Challenge Comparison Page</h1>
     </p>
 
-    <p>Challenge Name: {{challenge.name}}</p>
-    <p>Your maximum spending amount: {{challenge.dollar_max}} </p>
-    <p>Your maximum number of transactions: {{challenge.purchase}}</p>
+    <p>Challenge Name: {{challenge_to_show.name}}</p>
+    <p>Your maximum spending amount: {{challenge_to_show.dollar_max}} </p>
+    <p>Your maximum number of transactions: {{challenge_to_show.purchase_max}}</p>
 
     <div class="user1">
-        <p>Name:</p>
+        <p>Name: {{user.first_name}} {{user.last_name}}</p>
         <table>
                 <thead>
                     <th>Purchase</th>
-                    <th>Amount</th>
+                    <th class="amount">Amount</th>
                 </thead>
             </table>
         </div>
@@ -31,10 +31,14 @@
         <table>
             <thead>
                 <th>Purchase</th>
-                <th>Amount</th>
+                <th class="amount">Amount</th>
             </thead>
         </table>
     </div>
+    <form action="/add_challenger", method='POST'>
+        <p>Invite A Challenger:<input type="email" name="emailinvite"></p>
+    <input type="submit" value="Add Challenger">
+    </form>
     
 </body>
 
@@ -42,13 +46,14 @@
     .user1{
         display: inline-block;
         border: 1px solid black;
+        
     }
     .user2{
         display: inline-block;
         border: 1px solid black;
+        margin-left: 80px;
     }
-
-
+ 
 </style>
 
 </html>

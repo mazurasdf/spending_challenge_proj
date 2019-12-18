@@ -55,4 +55,29 @@ def add_challenge(request, user_id):
     }
     return render(request, 'add_challenge.html', context)
 
+def create_challenge(request, user_id):
+    errors = Challenge.objects.basic_validator(request.POST)
+    if errors:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f'/app/users/{request.session["user_id"]}/add_challenge')
+    this_user=User.objects.get(id=request.session['user_id'])
+
+    challenge_created=Challenge.objects.create(name=request.POST['name'], purchase_max=request.POST['purchase_max'], dollar_max=request.POST['dollar_max'])
+    challenge_created.users.add(this_user)
+ 
+    
+    return redirect(f"/app/users/{request.session['user_id']}/challenges/{challenge_created.id}")
+
+def show_challenge(request, user_id, challenge_id):
+    context ={
+        "challenge_to_show":Challenge.objects.get(id=challenge_id),
+        "user":User.objects.get(id=request.session['user_id'])
+    }
+
+    return render(request, 'challengepage.html', context)
+
+
+    
+
 
