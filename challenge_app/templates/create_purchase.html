@@ -10,7 +10,11 @@
 </head>
 
 <body>
-    <h2 class="Header">Add a purchase</h2>
+    <div id="header">
+        <h3>Add a Purchase!</h3>
+        <a href="/app/users/{{request.session.user_id}}">Back to my page</a>
+        <br><a href="/logout">logout</a>
+    </div>
 
     {% if messages %}
     <ul class="messages">
