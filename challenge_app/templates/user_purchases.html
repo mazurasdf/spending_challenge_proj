@@ -7,7 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>My Purchases</h1>
+    <div id="header">
+        <h3>My purchases!</h3>
+        <a href="/app/users/{{request.session.user_id}}">Back to my page</a>
+        <br><a href="/logout">logout</a>
+    </div>
 <table>
     
     {%for purchase in user_purchases%}
@@ -19,7 +23,6 @@
     {%endfor%}
 </table>
 
-<a href="/app/users/{{request.session.user_id}}">Back to My Page</a>
 <p><a href="/app/users/{{request.session.user_id}}/purchases/new">Add another purchase</a></p>
     
     
