@@ -107,3 +107,15 @@ def add_challenger(request, challenge_id):
     # }
     return redirect(f"/app/users/{request.session['user_id']}/challenges/{challenge_to_add_to.id}")
 
+
+def user_challenges(request, user_id):
+    this_user=User.objects.get(id=user_id)
+    context={
+        "challenges": this_user.challenges.all()
+
+    }
+
+
+    
+
+    return render(request, 'user_challenges.html', context)
