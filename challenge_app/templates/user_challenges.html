@@ -6,13 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/global_style.css' %}">
 </head>
 
 <body>
-    <h2>My Challenges!</h2>
-    
-    <ul>{%for challenge in challenges%}
-    
+    <div id="header">
+        <h3>My Challenges!</h3>
+        <a href="/app/users/{{request.session.user_id}}">Back to my page</a>
+        <br><a href="/logout">logout</a>
+    </div>
+    <ul>
+    {%for challenge in challenges%}
         <li><a href="/app/users/{{request.session.user_id}}/challenges/{{challenge.id}}">{{challenge.name}}</a></li>
     {%endfor%}
     </ul>

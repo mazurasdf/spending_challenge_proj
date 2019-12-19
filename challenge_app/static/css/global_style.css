@@ -1,0 +1,30 @@
+*{
+    background-color: lightcyan;
+    font-family: sans-serif;
+}
+
+#header{
+    border: 1px solid black;
+}
+
+.user_box {
+    display: inline-block;
+    border: 1px solid lightgrey;
+    padding: 10px;
+}
+
+.user_box table thead{
+    background-color: lightgrey;
+}
+
+.user_box td{
+    padding: 7px;
+}
+
+.user_box tr:nth-child(even){
+    background-color:#ebebeb;
+}
+
+.user_box tr:hover{
+    background-color: lightgrey;
+}
