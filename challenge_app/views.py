@@ -10,9 +10,16 @@ def user_page(request, user_id):
     if not "user_id" in request.session:
         messages.error(request, "na-ah, you gotta log in, sunny")
         return redirect('/')
+    if user_id != request.session['user_id']:
+        return redirect('/')
     return render(request, 'userprofile.html')
 
 def add_purchase_page(request, user_id):
+    if not "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect('/')
+    if user_id != request.session['user_id']:
+        return redirect('/')
     this_user = User.objects.get(id=request.session['user_id'])
     context = {
         'user_purchases': Purchase.objects.filter(user = this_user),
@@ -21,6 +28,12 @@ def add_purchase_page(request, user_id):
     return render(request, 'create_purchase.html', context)
 
 def create_purchase(request, user_id):
+    if not "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect('/')
+    if user_id != request.session['user_id']:
+        return redirect('/')
+
     fixedcategory=request.POST['category']
     tempdict={
             "category": request.POST['category']
@@ -45,6 +58,12 @@ def create_purchase(request, user_id):
 
 
 def user_purchases(request, user_id):
+    if not "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect('/')
+    if user_id != request.session['user_id']:
+        return redirect('/')
+
     this_user= User.objects.get(id=request.session['user_id'])
     context ={
         
@@ -53,12 +72,24 @@ def user_purchases(request, user_id):
     return render(request, 'user_purchases.html', context)
 
 def add_challenge(request, user_id):
+    if not "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect('/')
+    if user_id != request.session['user_id']:
+        return redirect('/')
+
     context={
         "categories": Category.objects.all()
     }
     return render(request, 'add_challenge.html', context)
 
 def create_challenge(request, user_id):
+    if not "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect('/')
+    if user_id != request.session['user_id']:
+        return redirect('/')
+
     errors = Challenge.objects.basic_validator(request.POST)
     if errors:
         for key, value in errors.items():
@@ -76,6 +107,10 @@ def create_challenge(request, user_id):
     return redirect(f"/app/users/{request.session['user_id']}/challenges/{challenge_created.id}")
 
 def show_challenge(request, user_id, challenge_id):
+    if not "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect('/')
+
     this_challenge = Challenge.objects.get(id=challenge_id)
     context ={
         "challenge_to_show":Challenge.objects.get(id=challenge_id),
@@ -95,6 +130,10 @@ def show_challenge(request, user_id, challenge_id):
 
 
 def add_challenger(request, challenge_id):
+    if not "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect('/')
+
     # challenger_to_add: 
     challenge_to_add_to= Challenge.objects.get(id=challenge_id)
     user_to_add= User.objects.get(email=request.POST['emailinvite'])
@@ -109,13 +148,15 @@ def add_challenger(request, challenge_id):
 
 
 def user_challenges(request, user_id):
+    if not "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect('/')
+    if user_id != request.session['user_id']:
+        return redirect('/')
+        
     this_user=User.objects.get(id=user_id)
     context={
         "challenges": this_user.challenges.all()
 
     }
-
-
-    
-
     return render(request, 'user_challenges.html', context)

@@ -5,8 +5,10 @@ from .models import User
 
 
 def index(request):
+    if "user_id" in request.session:
+        messages.error(request, "na-ah, you gotta log in, sunny")
+        return redirect(f'/app/users/{request.session["user_id"]}')
     return render(request, 'index.html')
-
 
 def register_user(request):
     if request.method != 'POST':
