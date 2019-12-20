@@ -11,20 +11,22 @@
 </head>
 
 <body>
-    <h1>Challenge Comparison Page</h1>
+        <h1 id="challenge_comparison_page">Challenge Comparison Page</h1>
+    <div id="main_box">
+        
 
-    <p>Challenge Name: {{challenge_to_show.name}}</p>
-    <p>Your maximum spending amount: {{challenge_to_show.dollar_max}} </p>
-    <p>Your maximum number of transactions: {{challenge_to_show.purchase_max}}</p>
-    <p>
-        Categories:
-        {% for category in challenge_to_show.categories.all %}
-        {{category.name}}
-        {% endfor %}
-    </p>
-    {% for this_user in user_list %}
+        <p><h4 class="challenge_page_text">Challenge Name: </h4>{{challenge_to_show.name}}</p>
+        <p><h4 class="challenge_page_text">Your maximum spending amount: </h4>{{challenge_to_show.dollar_max}}</p>
+        <p><h4 class="challenge_page_text">Your maximum number of transactions: </h4>{{challenge_to_show.purchase_max}}</p>
+        <p>
+            <h4 class="challenge_page_text">Categories:</h4>
+            {% for category in challenge_to_show.categories.all %}
+            <li>{{category.name}}</li>
+            {% endfor %}
+        </p>
+        {% for this_user in user_list %}
         <div class="user_box">
-            <p>{{this_user.user.first_name}} {{this_user.user.last_name}}</p>
+            <p class="challenger_name">{{this_user.user.first_name}} {{this_user.user.last_name}}</p>
             <table>
                 <thead>
                     <tr>
@@ -34,23 +36,31 @@
                 </thead>
                 <tbody>
                     {% for purchase in this_user.purchases %}
-                        <tr>
-                            <td>{{purchase.item_name}}</td>
-                            <td>{{purchase.amount}}</td>
-                        </tr>
+                    <tr>
+                        <td id="purchase_item">{{purchase.item_name}}</td>
+                        <td>${{purchase.amount}}</td>
+
+                    </tr>
+
                     {% endfor %}
                 </tbody>
             </table>
+            <div>
+                <p><h4 class="challenge_total">Total:</h4> ${{this_user.purchase_total}} </p>
+            </div>
         </div>
-    {% endfor %}
 
-    <form action="/app/users/add_challenger_to_challenge/{{challenge_to_show.id}}", method='POST'>
+        {% endfor %}
+        <p><h4 class="challenge_page_text">This user is losing:</h4> {{challenge_to_show.get_max.first_name}}</p>
+    
+
+    <form action="/app/users/add_challenger_to_challenge/{{challenge_to_show.id}}" , method='POST'>
         {% csrf_token %}
-        <p>Invite A Challenger: Add Email Address of user in database:<input type="email" name="emailinvite"></p>
+        <p class="invite_challenger">Want to invite A Challenger? Add Email Address of user in database:<input type="email" name="emailinvite"></p>
         <input type="submit" value="Add Challenger">
-    </form> 
+    </form>
 
-<!-- <h5>Users's currently in this challenge:</h5>
+    <!-- <h5>Users's currently in this challenge:</h5>
 {%for user in challenge_to_show.users.all%}
 <ul>
     <li>{{user.first_name}}</li>
@@ -58,5 +68,9 @@
 </ul>
 {%endfor%} -->
 
+    <br>
+    <a href="/app/users/{{request.session.user_id}}">Back to My Page</a>
+</div>
 </body>
+
 </html>

@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date, datetime
 import re
+# from challenge_app.models import Purchase
 
 class User_Manager(models.Manager):
     def basic_validator(self, post_data):
@@ -32,3 +33,16 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = User_Manager()
+
+    def get_sum(self):
+        sum = 0
+        for purchase in self.purchases.all():
+            sum = sum + purchase.amount
+        return sum
+
+    def get_sum_of_challenge_transactions(self, challenge):
+        sum=0
+        for purchase in self.purchases.filter(category__in=challenge.categories.all()):
+            sum=sum+purchase.amount
+        return sum
+

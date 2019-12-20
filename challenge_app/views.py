@@ -66,7 +66,7 @@ def user_purchases(request, user_id):
 
     this_user= User.objects.get(id=request.session['user_id'])
     context ={
-        
+        "user": this_user,
         "user_purchases": Purchase.objects.filter(user=this_user)
     }
     return render(request, 'user_purchases.html', context)
@@ -115,17 +115,22 @@ def show_challenge(request, user_id, challenge_id):
     context ={
         "challenge_to_show":Challenge.objects.get(id=challenge_id),
         "user":User.objects.get(id=request.session['user_id']),
-        # "user_purchases": Purchase.objects.filter(category__in=this_challenge.categories.all(),
+        # "user_purchases": Purchase.objects.filter(category__in=this_challenge.categories.all(),SDVc
         #                                           user=User.objects.get(id=request.session['user_id']))
         'user_list': []
     }
 
     for user in this_challenge.users.all():
+        purchases = Purchase.objects.filter(category__in=this_challenge.categories.all(), user=User.objects.get(id=user.id))
+        sum = 0
+        for item in purchases:
+            sum += item.amount
         context['user_list'].append({
             'user': user,
-            'purchases': Purchase.objects.filter(category__in=this_challenge.categories.all(),
-                                                 user=User.objects.get(id=user.id))
+            'purchases': purchases,
+            'purchase_total': sum,
         })
+        
     return render(request, 'challengepage.html', context)
 
 
