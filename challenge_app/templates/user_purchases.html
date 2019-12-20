@@ -10,12 +10,17 @@
 </head>
 <body>
     <div id="header">
-        <h3>My purchases!</h3>
+        <h3 id="mypurchasesheader">My purchases!</h3>
         <a href="/app/users/{{request.session.user_id}}">Back to my page</a>
-        <br><a href="/logout">logout</a>
+        <br><a href="/logout">Log Out</a>
     </div>
-<table>
-    
+    <br><br>
+<table id="purchases_table">
+    <thead>
+        <th>Category</th>
+        <th>Item</th>
+        <th>Amount</th>
+    </thead>
     {%for purchase in user_purchases%}
     <tr>
         <td>{{purchase.category.name}}</td>
@@ -24,10 +29,13 @@
     </tr>
     {%endfor%}
 </table>
+<h4 id= "total_spendings">Total Spendings for {{request.session.user_name}}: {{user.get_sum}}</h4>
 
-<p><a href="/app/users/{{request.session.user_id}}/purchases/new">Add another purchase</a></p>
+<p><a id= "add_another_purchase" href="/app/users/{{request.session.user_id}}/purchases/new">Add another purchase</a></p>
     
     
     
 </body>
+
+
 </html>

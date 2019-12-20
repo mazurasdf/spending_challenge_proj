@@ -5,8 +5,28 @@
 
 #header{
     border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+    background-image: url("/static/images/backgroundimage.jpeg");
+    
 }
 
+#purchases_table{
+    
+    padding: 20px;
+    margin-left: 420px;
+    
+}
+td{
+    padding: 10px;
+}
+#add_another_purchase{
+    margin-left: 480px;
+}
+
+#total_spendings{
+    margin-left:420px;
+}
 .user_box {
     display: inline-block;
     border: 1px solid lightgrey;
@@ -27,4 +47,48 @@
 
 .user_box tr:hover{
     background-color: lightgrey;
+}
+
+
+table, tr, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+#main_box{
+    margin-left: 400px;
+}
+
+
+.challenge_page_text{
+    color: darkblue;
+    display: inline;
+    text-align: center;
+}
+
+#challenge_comparison_page{
+    color: lightcoral;
+    font-family: cursive;
+    margin-left: 450px;
+}
+#purchase_item{
+    font-weight: bold;
+    color: blueviolet;
+}
+
+.invite_challenger{
+    font-style: italic;
+}
+
+.challenger_name{
+    color: turquoise;
+    text-align: center;
+    font-size: 32px;
+}   
+
+.challenge_total{
+    color: darkblue;
+    display: inline;
+    margin-left: 60px;
+    
 }

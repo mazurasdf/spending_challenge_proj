@@ -66,3 +66,13 @@ class Challenge(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = Challenge_Manager()
+
+    def get_max(self):
+        user_list=self.users.all()
+        max=user_list[0]
+        for user in user_list:
+                if user.get_sum_of_challenge_transactions(self)>max.get_sum_of_challenge_transactions(self):
+                    max=user
+        return max
+        
+        
