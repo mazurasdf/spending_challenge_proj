@@ -1,6 +1,7 @@
 *{
     background-color: lightcyan;
     font-family: sans-serif;
+    vertical-align: top;
 }
 
 #header{
@@ -66,10 +67,20 @@ table, tr, td {
     text-align: center;
 }
 
+header {
+    width:500px;
+    margin-left:400px;
+}
+
 #challenge_comparison_page{
     color: lightcoral;
     font-family: cursive;
-    margin-left: 450px;
+    display:inline-block;
+}
+#greeting {
+    display:inline-block;
+    margin-top: 38px;
+    margin-left: 26px;
 }
 #purchase_item{
     font-weight: bold;
