@@ -28,12 +28,14 @@
     <form class="add_item_form" action="/app/users/{{request.session.user_id}}/purchases/create" , method='POST'>
         {% csrf_token %}
         <p>Item: <input type="text" name="item"></p>
-        <p>Category: <select id="selectcategory" name="category"></p>
-        <option value="newcategory">Click to add new category</option>
-        {%for category in categories%}
-        <option value="{{category.name}}">{{category.name}}</option>
-        {%endfor%}
-        </select>
+        <label>Category: </label> <select id="selectcategory" name="category">
+            <option value="newcategory">Click to add new category</option>
+
+            {%for category in categories%}
+            <option value="{{category.name}}">{{category.name}}</option>
+            {%endfor%}
+
+                    </select>
         <br><p id="addnewcategory">Add New Category: <input type="text"  name="newcategory"></p>
         <p>Amount: <input type="text" name="amount"></p>
         <p>Location: <input type="text" name="location"></p>
