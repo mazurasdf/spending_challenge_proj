@@ -220,4 +220,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/macos,python,django,windows
+# End of https://www.gitignore.io/api/macos,python,django,windows~

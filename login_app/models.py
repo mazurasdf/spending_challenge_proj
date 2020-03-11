@@ -46,3 +46,4 @@ class User(models.Model):
             sum=sum+purchase.amount
         return sum
 
+    #for each of the user's purchases that fall into categories that are in that challenge's list of categories (each challenge has a list of categories associated with it), add them up. Don't add up purchases from categories not in the challenge category.

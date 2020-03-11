@@ -11,7 +11,11 @@
 </head>
 
 <body>
+    <header>
         <h1 id="challenge_comparison_page">Challenge Comparison Page</h1>
+        <p id="greeting">Hello, {{request.session.user_name}}</p>
+    </header>
+        
     <div id="main_box">
         
 
@@ -52,6 +56,8 @@
 
         {% endfor %}
         <p><h4 class="challenge_page_text">This user is losing:</h4> {{challenge_to_show.get_max.first_name}}</p>
+        <p><h4 class="challenge_page_text">This user is winning:</h4> {{challenge_to_show.get_min.first_name}}</p>
+
     
 
     <form action="/app/users/add_challenger_to_challenge/{{challenge_to_show.id}}" , method='POST'>

@@ -67,6 +67,7 @@ class Challenge(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = Challenge_Manager()
 
+#each challenge has users. for each user in that challenge, you want to find the purchases sum.
     def get_max(self):
         user_list=self.users.all()
         max=user_list[0]
@@ -75,4 +76,11 @@ class Challenge(models.Model):
                     max=user
         return max
         
+    def get_min(self):
+        user_list=self.users.all()
+        min=user_list[0]
+        for user in user_list:
+            if user.get_sum_of_challenge_transactions(self)<min.get_sum_of_challenge_transactions(self):
+                min=user
+        return min
         
